@@ -1,0 +1,543 @@
+{
+  "metadata": {
+    "source_image": "C:\\Users\\kanha\\OneDrive\\Desktop\\prompt-thon\\wall-wise\\stage1_parser\\sample_inputs\\plan_c.png",
+    "image_size_px": [
+      1536,
+      1024
+    ],
+    "scale_px_per_m": 100,
+    "floor_height_m": 3.0,
+    "parser_version": "1.0",
+    "fallback_used": false
+  },
+  "walls": [
+    {
+      "x1": 1111,
+      "y1": 815,
+      "x2": 1111,
+      "y2": 125,
+      "orientation": "vertical",
+      "length_px": 690.0,
+      "length_m": 6.9,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 814,
+      "y1": 138,
+      "x2": 1105,
+      "y2": 138,
+      "orientation": "horizontal",
+      "length_px": 291.0,
+      "length_m": 2.91,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 422,
+      "y1": 125,
+      "x2": 1114,
+      "y2": 125,
+      "orientation": "horizontal",
+      "length_px": 692.0,
+      "length_m": 6.92,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 672,
+      "y1": 127,
+      "x2": 1112,
+      "y2": 127,
+      "orientation": "horizontal",
+      "length_px": 440.0,
+      "length_m": 4.4,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 817,
+      "y1": 328,
+      "x2": 817,
+      "y2": 128,
+      "orientation": "vertical",
+      "length_px": 200.0,
+      "length_m": 2.0,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 422,
+      "y1": 654,
+      "x2": 422,
+      "y2": 127,
+      "orientation": "vertical",
+      "length_px": 527.0,
+      "length_m": 5.27,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 807,
+      "y1": 137,
+      "x2": 807,
+      "y2": 328,
+      "orientation": "vertical",
+      "length_px": 191.0,
+      "length_m": 1.91,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 816,
+      "y1": 815,
+      "x2": 816,
+      "y2": 573,
+      "orientation": "vertical",
+      "length_px": 242.0,
+      "length_m": 2.42,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 1096,
+      "y1": 358,
+      "x2": 1096,
+      "y2": 193,
+      "orientation": "vertical",
+      "length_px": 165.0,
+      "length_m": 1.65,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 791,
+      "y1": 815,
+      "x2": 1110,
+      "y2": 815,
+      "orientation": "horizontal",
+      "length_px": 319.0,
+      "length_m": 3.19,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 424,
+      "y1": 654,
+      "x2": 424,
+      "y2": 351,
+      "orientation": "vertical",
+      "length_px": 303.0,
+      "length_m": 3.03,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 430,
+      "y1": 641,
+      "x2": 430,
+      "y2": 359,
+      "orientation": "vertical",
+      "length_px": 282.0,
+      "length_m": 2.82,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 697,
+      "y1": 128,
+      "x2": 879,
+      "y2": 128,
+      "orientation": "horizontal",
+      "length_px": 182.0,
+      "length_m": 1.82,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 556,
+      "y1": 139,
+      "x2": 805,
+      "y2": 139,
+      "orientation": "horizontal",
+      "length_px": 249.0,
+      "length_m": 2.49,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 470,
+      "y1": 654,
+      "x2": 703,
+      "y2": 642,
+      "orientation": "diagonal",
+      "length_px": 233.3,
+      "length_m": 2.33,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 815,
+      "y1": 801,
+      "x2": 1057,
+      "y2": 801,
+      "orientation": "horizontal",
+      "length_px": 242.0,
+      "length_m": 2.42,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 434,
+      "y1": 643,
+      "x2": 636,
+      "y2": 643,
+      "orientation": "horizontal",
+      "length_px": 202.0,
+      "length_m": 2.02,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 556,
+      "y1": 124,
+      "x2": 694,
+      "y2": 124,
+      "orientation": "horizontal",
+      "length_px": 138.0,
+      "length_m": 1.38,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 815,
+      "y1": 450,
+      "x2": 1101,
+      "y2": 450,
+      "orientation": "horizontal",
+      "length_px": 286.0,
+      "length_m": 2.86,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 804,
+      "y1": 440,
+      "x2": 1101,
+      "y2": 440,
+      "orientation": "horizontal",
+      "length_px": 297.0,
+      "length_m": 2.97,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 426,
+      "y1": 651,
+      "x2": 698,
+      "y2": 642,
+      "orientation": "diagonal",
+      "length_px": 272.1,
+      "length_m": 2.72,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 661,
+      "y1": 642,
+      "x2": 661,
+      "y2": 815,
+      "orientation": "vertical",
+      "length_px": 173.0,
+      "length_m": 1.73,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 804,
+      "y1": 451,
+      "x2": 1101,
+      "y2": 451,
+      "orientation": "horizontal",
+      "length_px": 297.0,
+      "length_m": 2.97,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 804,
+      "y1": 605,
+      "x2": 1064,
+      "y2": 605,
+      "orientation": "horizontal",
+      "length_px": 260.0,
+      "length_m": 2.6,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 434,
+      "y1": 646,
+      "x2": 620,
+      "y2": 646,
+      "orientation": "horizontal",
+      "length_px": 186.0,
+      "length_m": 1.86,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 667,
+      "y1": 802,
+      "x2": 667,
+      "y2": 657,
+      "orientation": "vertical",
+      "length_px": 145.0,
+      "length_m": 1.45,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 497,
+      "y1": 654,
+      "x2": 704,
+      "y2": 644,
+      "orientation": "diagonal",
+      "length_px": 207.2,
+      "length_m": 2.07,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 671,
+      "y1": 802,
+      "x2": 671,
+      "y2": 642,
+      "orientation": "vertical",
+      "length_px": 160.0,
+      "length_m": 1.6,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 438,
+      "y1": 358,
+      "x2": 438,
+      "y2": 192,
+      "orientation": "vertical",
+      "length_px": 166.0,
+      "length_m": 1.66,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 430,
+      "y1": 646,
+      "x2": 682,
+      "y2": 646,
+      "orientation": "horizontal",
+      "length_px": 252.0,
+      "length_m": 2.52,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 664,
+      "y1": 653,
+      "x2": 664,
+      "y2": 812,
+      "orientation": "vertical",
+      "length_px": 159.0,
+      "length_m": 1.59,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 525,
+      "y1": 652,
+      "x2": 659,
+      "y2": 652,
+      "orientation": "horizontal",
+      "length_px": 134.0,
+      "length_m": 1.34,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 809,
+      "y1": 283,
+      "x2": 809,
+      "y2": 140,
+      "orientation": "vertical",
+      "length_px": 143.0,
+      "length_m": 1.43,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 879,
+      "y1": 139,
+      "x2": 1042,
+      "y2": 139,
+      "orientation": "horizontal",
+      "length_px": 163.0,
+      "length_m": 1.63,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 818,
+      "y1": 442,
+      "x2": 1035,
+      "y2": 442,
+      "orientation": "horizontal",
+      "length_px": 217.0,
+      "length_m": 2.17,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 859,
+      "y1": 606,
+      "x2": 1004,
+      "y2": 606,
+      "orientation": "horizontal",
+      "length_px": 145.0,
+      "length_m": 1.45,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 860,
+      "y1": 448,
+      "x2": 1101,
+      "y2": 448,
+      "orientation": "horizontal",
+      "length_px": 241.0,
+      "length_m": 2.41,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 917,
+      "y1": 447,
+      "x2": 1101,
+      "y2": 447,
+      "orientation": "horizontal",
+      "length_px": 184.0,
+      "length_m": 1.84,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 817,
+      "y1": 441,
+      "x2": 978,
+      "y2": 441,
+      "orientation": "horizontal",
+      "length_px": 161.0,
+      "length_m": 1.61,
+      "wall_type": "partition"
+    }
+  ],
+  "rooms": [
+    {
+      "label": "Room_Area_1",
+      "centroid_px": [
+        956,
+        703
+      ],
+      "bounding_box_px": [
+        818,
+        606,
+        284,
+        196
+      ],
+      "area_m2": 5.32,
+      "polygon_px": [
+        [
+          818,
+          609
+        ],
+        [
+          1088,
+          620
+        ],
+        [
+          1101,
+          799
+        ],
+        [
+          821,
+          801
+        ]
+      ]
+    },
+    {
+      "label": "Room_Area_2",
+      "centroid_px": [
+        980,
+        529
+      ],
+      "bounding_box_px": [
+        818,
+        452,
+        284,
+        172
+      ],
+      "area_m2": 3.47,
+      "polygon_px": [
+        [
+          818,
+          454
+        ],
+        [
+          1100,
+          452
+        ],
+        [
+          1101,
+          622
+        ],
+        [
+          820,
+          602
+        ],
+        [
+          917,
+          480
+        ],
+        [
+          821,
+          478
+        ]
+      ]
+    },
+    {
+      "label": "Room_Area_3",
+      "centroid_px": [
+        967,
+        282
+      ],
+      "bounding_box_px": [
+        818,
+        139,
+        284,
+        301
+      ],
+      "area_m2": 7.58,
+      "polygon_px": [
+        [
+          821,
+          139
+        ],
+        [
+          1101,
+          141
+        ],
+        [
+          1099,
+          439
+        ],
+        [
+          818,
+          436
+        ],
+        [
+          917,
+          335
+        ],
+        [
+          818,
+          322
+        ]
+      ]
+    }
+  ],
+  "openings": [
+    {
+      "type": "window",
+      "start_px": [
+        805,
+        139
+      ],
+      "end_px": [
+        879,
+        139
+      ],
+      "width_m": 0.74,
+      "wall_index": -1
+    }
+  ],
+  "summary": {
+    "total_walls": 39,
+    "load_bearing_walls": 20,
+    "partition_walls": 19,
+    "total_rooms": 3,
+    "total_openings": 1,
+    "doors": 0,
+    "windows": 1
+  }
+}

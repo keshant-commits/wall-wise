@@ -12,11 +12,10 @@ import os
 from shapely.geometry import Polygon
 
 # ── CONFIG — change these paths to match your files ─────────
-IMAGE_PATH  = "sample_inputs/plan_a.png"
-OUTPUT_PATH = "outputs/floor_plan_data.json"
+BASE_DIR = r"C:\Users\kanha\OneDrive\Desktop\prompt-thon\wall-wise\stage1_parser"
 
-FLOOR_HEIGHT_M  = 3.0    # standard floor height in metres
-SCALE_PX_PER_M  = 50     # pixels per metre (adjust based on scale bar)
+FLOOR_HEIGHT_M = 3.0    # standard floor height in metres
+SCALE_PX_PER_M = 100    # pixels per metre
 # ────────────────────────────────────────────────────────────
 
 
@@ -78,9 +77,9 @@ def detect_walls(binary_img):
         binary_img,
         rho=1,
         theta=np.pi / 180,
-        threshold = 120,      # Higher = only detects very strong, clear walls
-        minLineLength = 100,  # Higher = ignores short lines (like the bed or sofa)
-        maxLineGap = 2       # Lower = won't accidentally connect two different things
+        threshold = 80,      # CHANGE: Lowered from 120 to 80 to catch more lines
+        minLineLength = 130,   
+        maxLineGap = 5        # CHANGE: Increased from 2 to 5 to bridge small gaps
     )
 
     if lines is None:
@@ -143,6 +142,41 @@ def snap_to_orthogonal(segments, tolerance=8):
 
     return snapped
 
+def remove_duplicate_walls(segments, proximity=10):
+    """
+    Remove near-identical wall segments detected multiple times.
+    Two walls are duplicates if both endpoints are within
+    'proximity' pixels of each other.
+    """
+    unique = []
+    for seg in segments:
+        is_duplicate = False
+        for existing in unique:
+            # Check if both endpoints are very close
+            start_close = (
+                abs(seg["x1"] - existing["x1"]) < proximity and
+                abs(seg["y1"] - existing["y1"]) < proximity
+            )
+            end_close = (
+                abs(seg["x2"] - existing["x2"]) < proximity and
+                abs(seg["y2"] - existing["y2"]) < proximity
+            )
+            # Also check reversed direction
+            start_close_rev = (
+                abs(seg["x1"] - existing["x2"]) < proximity and
+                abs(seg["y1"] - existing["y2"]) < proximity
+            )
+            end_close_rev = (
+                abs(seg["x2"] - existing["x1"]) < proximity and
+                abs(seg["y2"] - existing["y1"]) < proximity
+            )
+            if (start_close and end_close) or (start_close_rev and end_close_rev):
+                is_duplicate = True
+                break
+        if not is_duplicate:
+            unique.append(seg)
+
+    return unique
 
 def classify_walls(segments, img_shape):
     """
@@ -189,28 +223,23 @@ def classify_walls(segments, img_shape):
 def detect_rooms(binary_img):
     """
     Use contour detection to find enclosed room regions.
-
-    How it works:
-      - Dilate the binary image to close small wall gaps
-      - findContours finds all closed shapes
-      - Filter by area to remove noise and the whole-image border
-      - Each valid contour = one room
     """
     h, w = binary_img.shape
-    min_area = h * w * 0.05   # ignore tiny blobs
-    max_area = h * w * 0.90    # ignore the full image border
+    # CHANGE: Lowered from 0.03 to 0.01 to catch smaller rooms in Plan B/C
+    min_area = h * w * 0.01    
+    max_area = h * w * 0.25    
 
-    # Dilate to close gaps between walls
-    kernel = np.ones((5, 5), np.uint8)
-    dilated = cv2.dilate(binary_img, kernel, iterations=2)
+    kernel  = np.ones((3, 3), np.uint8)
+    dilated = cv2.dilate(binary_img, kernel, iterations=1)
 
     contours, _ = cv2.findContours(
         dilated, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE
     )
 
+    # CHANGE: Using generic labels to avoid "Random Bedroom" naming errors
     room_labels = [f"Room_Area_{i+1}" for i in range(30)]
 
-    rooms = []
+    rooms     = []
     label_idx = 0
 
     for contour in contours:
@@ -218,14 +247,19 @@ def detect_rooms(binary_img):
         if not (min_area < area < max_area):
             continue
 
-        # Simplify contour to polygon
         epsilon = 0.02 * cv2.arcLength(contour, True)
         approx  = cv2.approxPolyDP(contour, epsilon, True)
 
-        # Bounding box
+        # Skip contours with too many points — real rooms are simple polygons
+        if len(approx) > 10:
+            continue
+
         x, y, rw, rh = cv2.boundingRect(contour)
 
-        # Centroid
+        # Skip contours whose bounding box spans too much of the image
+        if rw > w * 0.40 or rh > h * 0.40:
+            continue
+
         M = cv2.moments(contour)
         if M["m00"] != 0:
             cx = int(M["m10"] / M["m00"])
@@ -250,76 +284,176 @@ def detect_rooms(binary_img):
 
 def detect_openings(binary_img, walls):
     """
-    Detect doors and windows as gaps in wall lines.
-
-    How it works:
-      - Walk along each detected wall pixel by pixel
-      - If we hit an empty region (gap), record its start
-      - When the gap ends, measure its width
-      - Short gaps = doors, longer gaps = windows
+    Detect doors and windows by finding gaps between wall segments.
+    For high-resolution images, checks gaps between wall endpoints.
     """
     openings = []
 
-    for i, wall in enumerate(walls):
-        x1, y1 = wall["x1"], wall["y1"]
-        x2, y2 = wall["x2"], wall["y2"]
-        length  = wall["length_px"]
+    # Group walls by orientation
+    horizontal = [wall for wall in walls if wall.get("orientation") == "horizontal"]
+    vertical   = [wall for wall in walls if wall.get("orientation") == "vertical"]
 
-        steps     = max(int(length / 8), 2)
-        gap_start = None
+    def check_gap_between(w1, w2, orientation):
+        """Check if there is a gap between two parallel wall segments."""
+        if orientation == "horizontal":
+            if abs(w1["y1"] - w2["y1"]) > 20:
+                return None
+            x1_end   = max(w1["x1"], w1["x2"])
+            x2_start = min(w2["x1"], w2["x2"])
+            gap = x2_start - x1_end
+            if 15 < gap < 150:
+                mid_y = (w1["y1"] + w2["y1"]) // 2
+                opening_type = "door" if gap < 70 else "window"
+                return {
+                    "type"      : opening_type,
+                    "start_px"  : [x1_end, mid_y],
+                    "end_px"    : [x2_start, mid_y],
+                    "width_m"   : round(gap / SCALE_PX_PER_M, 2),
+                    "wall_index": -1
+                }
 
-        for step in range(steps):
-            t  = step / steps
-            px = int(x1 + t * (x2 - x1))
-            py = int(y1 + t * (y2 - y1))
+        elif orientation == "vertical":
+            if abs(w1["x1"] - w2["x1"]) > 20:
+                return None
+            y1_end   = max(w1["y1"], w1["y2"])
+            y2_start = min(w2["y1"], w2["y2"])
+            gap = y2_start - y1_end
+            if 15 < gap < 150:
+                mid_x = (w1["x1"] + w2["x1"]) // 2
+                opening_type = "door" if gap < 70 else "window"
+                return {
+                    "type"      : opening_type,
+                    "start_px"  : [mid_x, y1_end],
+                    "end_px"    : [mid_x, y2_start],
+                    "width_m"   : round(gap / SCALE_PX_PER_M, 2),
+                    "wall_index": -1
+                }
 
-            # Clamp to image bounds
-            px = max(0, min(px, binary_img.shape[1] - 1))
-            py = max(0, min(py, binary_img.shape[0] - 1))
+        return None
 
-            pixel_val = binary_img[py, px]
+    # Check all pairs of horizontal walls for gaps
+    for i in range(len(horizontal)):
+        for j in range(i + 1, len(horizontal)):
+            result = check_gap_between(
+                horizontal[i], horizontal[j], "horizontal"
+            )
+            if result:
+                openings.append(result)
 
-            if pixel_val < 128:  # gap (background)
-                if gap_start is None:
-                    gap_start = (px, py)
-            else:
-                if gap_start is not None:
-                    gap_end    = (px, py)
-                    gap_length = math.sqrt(
-                        (gap_end[0] - gap_start[0]) ** 2 +
-                        (gap_end[1] - gap_start[1]) ** 2
-                    )
-                    if 15 < gap_length < 100:
-                        opening_type = "door" if gap_length < 60 else "window"
-                        openings.append({
-                            "type"      : opening_type,
-                            "start_px"  : list(gap_start),
-                            "end_px"    : list(gap_end),
-                            "width_m"   : round(gap_length / SCALE_PX_PER_M, 2),
-                            "wall_index": i
-                        })
-                    gap_start = None
+    # Check all pairs of vertical walls for gaps
+    for i in range(len(vertical)):
+        for j in range(i + 1, len(vertical)):
+            result = check_gap_between(
+                vertical[i], vertical[j], "vertical"
+            )
+            if result:
+                openings.append(result)
 
-    return openings
+    # Remove duplicate openings at the same location
+    unique = []
+    for op in openings:
+        is_dup = False
+        for existing in unique:
+            if (abs(op["start_px"][0] - existing["start_px"][0]) < 20 and
+                abs(op["start_px"][1] - existing["start_px"][1]) < 20):
+                is_dup = True
+                break
+        if not is_dup:
+            unique.append(op)
+
+    return unique
 
 
-def visualise_results(original_img, walls, rooms, openings):
+def visualise_results(original_img, walls, rooms, openings, output_path, plan_name):
     """
-    Shows the original image without any colored drawings, 
-    ensuring the window still pops up for the user.
+    Saves the overlay image for each plan.
+    All plans are shown together at the end by show_all_results().
     """
-    # We create a display image but we DON'T draw anything on it
     vis = original_img.copy()
 
-    # Show the clean, original image in a window
-    plt.figure(figsize=(14, 10))
-    plt.imshow(cv2.cvtColor(vis, cv2.COLOR_BGR2RGB))
-    
-    plt.title("Original Floor Plan (Coordinates stored in JSON)")
-    plt.axis("off")
-    plt.tight_layout()
-    plt.show()
+    # Draw walls
+    for wall in walls:
+        color = (0, 0, 255) if wall["wall_type"] == "load_bearing" else (0, 165, 255)
+        cv2.line(vis,
+                 (wall["x1"], wall["y1"]),
+                 (wall["x2"], wall["y2"]),
+                 color, 2)
 
+    # Draw room centroids and labels
+    for room in rooms:
+        cx, cy = room["centroid_px"]
+        cv2.circle(vis, (cx, cy), 8, (0, 200, 0), -1)
+        cv2.putText(vis, room["label"][:10],
+                    (cx - 20, cy - 14),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 140, 0), 1)
+
+    # Draw openings
+    for opening in openings:
+        color = (255, 0, 255) if opening["type"] == "door" else (0, 255, 255)
+        cv2.line(vis,
+                 tuple(opening["start_px"]),
+                 tuple(opening["end_px"]),
+                 color, 3)
+
+    # Save the overlay image to disk
+    save_path = os.path.join(
+        os.path.dirname(output_path), f"{plan_name}_overlay.png"
+    )
+    cv2.imwrite(save_path, vis)
+    print(f"  Overlay saved: {save_path}")
+
+    # Return both images so show_all_results() can display them
+    return original_img, vis, plan_name
+
+def show_all_results(all_results):
+    """
+    Shows all plans side by side in one single window.
+    all_results is a list of (original_img, overlay_img, plan_name) tuples.
+    """
+    num_plans = len(all_results)
+    if num_plans == 0:
+        return
+
+    # 2 columns per plan (original + overlay), num_plans rows
+    fig, axes = plt.subplots(num_plans, 2, figsize=(20, 7 * num_plans))
+
+    # Handle case where only 1 plan was processed
+    if num_plans == 1:
+        axes = [axes]
+
+    for row, (original, overlay, plan_name) in enumerate(all_results):
+        axes[row][0].imshow(cv2.cvtColor(original, cv2.COLOR_BGR2RGB))
+        axes[row][0].set_title(f"{plan_name} — Original", fontsize=12)
+        axes[row][0].axis("off")
+
+        axes[row][1].imshow(cv2.cvtColor(overlay, cv2.COLOR_BGR2RGB))
+        axes[row][1].set_title(
+            f"{plan_name} — Parser output\n"
+            "Red=load-bearing  Orange=partition  "
+            "Green=rooms  Magenta=doors  Yellow=windows",
+            fontsize=10
+        )
+        axes[row][1].axis("off")
+
+    plt.suptitle(
+        "Stage 1 — Floor Plan Parser Results (All Plans)",
+        fontsize=14, y=1.01
+    )
+    plt.tight_layout()
+
+    # Save the combined view
+    combined_path = os.path.join(
+        os.path.dirname(
+            all_results[0][0].tobytes and
+            r"C:\Users\kanha\OneDrive\Desktop\prompt-thon\wall-wise\stage1_parser\outputs\all_plans_combined.png"
+        )
+    )
+    plt.savefig(
+        r"C:\Users\kanha\OneDrive\Desktop\prompt-thon\wall-wise\stage1_parser\outputs\all_plans_combined.png",
+        dpi=120, bbox_inches="tight"
+    )
+    print("\n  Combined view saved to: outputs/all_plans_combined.png")
+    plt.show()
 
 def build_output_json(walls, rooms, openings, image_path, img_shape):
     """
@@ -401,6 +535,10 @@ def run_parser(image_path, output_path):
     print("\nStep 3: Snapping to orthogonal grid...")
     snapped_walls = snap_to_orthogonal(raw_walls)
 
+    print("\nStep 3b: Removing duplicate walls...")
+    snapped_walls = remove_duplicate_walls(snapped_walls, proximity=10)
+    print(f"  After deduplication: {len(snapped_walls)} walls")
+
     print("\nStep 4: Classifying walls...")
     walls = classify_walls(snapped_walls, original.shape)
     lb = sum(1 for w in walls if w["wall_type"] == "load_bearing")
@@ -427,17 +565,43 @@ def run_parser(image_path, output_path):
     print("\nStep 8: Validating output...")
     validate_output(output)
 
-    print("\nStep 9: Showing debug visualisation...")
-    print("  (Close the image window to finish the program)")
-    visualise_results(original, walls, rooms, openings)
+    print("\nStep 9: Generating overlay image...")
+    result = visualise_results(original, walls, rooms, openings, output_path,
+                               os.path.basename(image_path).replace(".png", ""))
 
     print(f"\n{'='*50}")
     print("DONE — Stage 1 complete")
     print(f"{'='*50}\n")
 
-    return output
+    return output, result
 
 
 # ── ENTRY POINT ───────────────────────────────────────────────
 if __name__ == "__main__":
-    run_parser(IMAGE_PATH, OUTPUT_PATH)
+    plans = [
+        (
+            os.path.join(BASE_DIR, "sample_inputs", "plan_a.png"),
+            os.path.join(BASE_DIR, "outputs", "plan_a_data.json")
+        ),
+        (
+            os.path.join(BASE_DIR, "sample_inputs", "plan_b.png"),
+            os.path.join(BASE_DIR, "outputs", "plan_b_data.json")
+        ),
+        (
+            os.path.join(BASE_DIR, "sample_inputs", "plan_c.png"),
+            os.path.join(BASE_DIR, "outputs", "plan_c_data.json")
+        ),
+    ]
+
+    all_results = []   # collect results from all plans
+
+    for image_path, output_path in plans:
+        if os.path.exists(image_path):
+            output, result = run_parser(image_path, output_path)
+            all_results.append(result)
+        else:
+            print(f"\nSKIPPED — image not found: {image_path}")
+
+    # Show all 3 plans together in one window at the very end
+    print("\nShowing all plans in combined view...")
+    show_all_results(all_results)
