@@ -12,7 +12,7 @@ import os
 from shapely.geometry import Polygon
 
 # ── CONFIG — change these paths to match your files ─────────
-IMAGE_PATH  = "sample_inputs/plan_b.png"
+IMAGE_PATH  = "sample_inputs/plan_a.png"
 OUTPUT_PATH = "outputs/floor_plan_data.json"
 
 FLOOR_HEIGHT_M  = 3.0    # standard floor height in metres
