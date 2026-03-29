@@ -23,7 +23,7 @@ SCALE_PX_PER_M  = 50     # pixels per metre (adjust based on scale bar)
 def load_and_preprocess(image_path):
     """
     Load the floor plan image and convert it to a clean binary image.
-    Binary = every pixel is either 255 (wall) or 0 (background).
+    Order: Load -> Grayscale -> Blur (Noise Removal) -> Threshold (B&W) -> Closing
     """
     img = cv2.imread(image_path)
 
@@ -36,14 +36,17 @@ def load_and_preprocess(image_path):
 
     print(f"  Image loaded: {img.shape[1]}px wide x {img.shape[0]}px tall")
 
-    # Step A — convert colour (BGR) to grayscale
-    # Each pixel goes from 3 values (B,G,R) to 1 value (brightness 0–255)
+    # Step A — Convert colour to grayscale (REQUIRED FIRST)
+    # This creates the 'gray' variable so the computer knows what it is.
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    # Step B — adaptive threshold: converts grayscale to pure black/white
-    # THRESH_BINARY_INV flips it so dark walls become white (255)
-    # blockSize=15 means each 15x15 region gets its own threshold
-    # C=4 subtracts a constant to reduce noise — increase if too noisy
+    # Step B — Median Blur 
+    # This 'smudges' out thin lines like text and furniture while keeping thick walls.
+    # We use the 'gray' variable we just created above.
+    gray = cv2.medianBlur(gray, 5)
+
+    # Step C — Adaptive threshold: converts grayscale to pure black/white
+    # THRESH_BINARY_INV flips it so walls become white (255) and background black (0).
     binary = cv2.adaptiveThreshold(
         gray, 255,
         cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
@@ -52,9 +55,9 @@ def load_and_preprocess(image_path):
         C=4
     )
 
-    # Step C — morphological closing: fills tiny gaps in wall lines
-    # Increase kernel to (5,5) or (7,7) if walls appear broken
-    kernel = np.ones((3, 3), np.uint8)
+    # Step D — Morphological closing: fills tiny gaps in wall lines
+    # Using a 5x5 kernel makes the walls "solid" so the line detector doesn't skip.
+    kernel = np.ones((5, 5), np.uint8)
     cleaned = cv2.morphologyEx(binary, cv2.MORPH_CLOSE, kernel)
 
     return img, gray, cleaned
@@ -70,13 +73,14 @@ def detect_walls(binary_img):
       minLineLength — increase (60,80) to ignore short text/furniture lines
       maxLineGap  — increase (20,30) to connect broken wall segments
     """
+    # Try these new settings in detect_walls:
     lines = cv2.HoughLinesP(
         binary_img,
         rho=1,
         theta=np.pi / 180,
-        threshold=80,
-        minLineLength=40,
-        maxLineGap=10
+        threshold = 120,      # Higher = only detects very strong, clear walls
+        minLineLength = 100,  # Higher = ignores short lines (like the bed or sofa)
+        maxLineGap = 2       # Lower = won't accidentally connect two different things
     )
 
     if lines is None:
@@ -193,7 +197,7 @@ def detect_rooms(binary_img):
       - Each valid contour = one room
     """
     h, w = binary_img.shape
-    min_area = h * w * 0.005   # ignore tiny blobs
+    min_area = h * w * 0.05   # ignore tiny blobs
     max_area = h * w * 0.90    # ignore the full image border
 
     # Dilate to close gaps between walls
@@ -204,11 +208,7 @@ def detect_rooms(binary_img):
         dilated, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE
     )
 
-    room_labels = [
-        "living_room", "bedroom_1", "bedroom_2", "bedroom_3", "bedroom_4",
-        "bathroom_1", "bathroom_2", "bathroom_3",
-        "kitchen", "dining", "foyer", "laundry", "hallway"
-    ]
+    room_labels = [f"Room_Area_{i+1}" for i in range(30)]
 
     rooms = []
     label_idx = 0
@@ -305,47 +305,17 @@ def detect_openings(binary_img, walls):
 
 def visualise_results(original_img, walls, rooms, openings):
     """
-    Draw all detected elements on the image and show it.
-    This is your main tool for checking if the parser worked correctly.
-
-    Colours:
-      Red lines    = load-bearing walls
-      Orange lines = partition walls
-      Green dots   = room centroids
-      Magenta      = doors
-      Yellow       = windows
+    Shows the original image without any colored drawings, 
+    ensuring the window still pops up for the user.
     """
+    # We create a display image but we DON'T draw anything on it
     vis = original_img.copy()
 
-    # Draw walls
-    for wall in walls:
-        color = (0, 0, 255) if wall["wall_type"] == "load_bearing" else (0, 165, 255)
-        pt1   = (wall["x1"], wall["y1"])
-        pt2   = (wall["x2"], wall["y2"])
-        cv2.line(vis, pt1, pt2, color, 2)
-
-    # Draw rooms
-    for room in rooms:
-        cx, cy = room["centroid_px"]
-        cv2.circle(vis, (cx, cy), 6, (0, 200, 0), -1)
-        cv2.putText(
-            vis, room["label"][:10],
-            (cx - 20, cy - 12),
-            cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 150, 0), 1
-        )
-
-    # Draw openings
-    for opening in openings:
-        color = (255, 0, 255) if opening["type"] == "door" else (0, 255, 255)
-        cv2.line(vis, tuple(opening["start_px"]), tuple(opening["end_px"]), color, 3)
-
-    # Show in matplotlib window
+    # Show the clean, original image in a window
     plt.figure(figsize=(14, 10))
     plt.imshow(cv2.cvtColor(vis, cv2.COLOR_BGR2RGB))
-    plt.title(
-        "Red = load-bearing  |  Orange = partition  |  "
-        "Green = rooms  |  Magenta = doors  |  Yellow = windows"
-    )
+    
+    plt.title("Original Floor Plan (Coordinates stored in JSON)")
     plt.axis("off")
     plt.tight_layout()
     plt.show()

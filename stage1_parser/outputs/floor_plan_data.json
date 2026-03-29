@@ -1,0 +1,1047 @@
+{
+  "metadata": {
+    "source_image": "sample_inputs/plan_a.png",
+    "image_size_px": [
+      800,
+      620
+    ],
+    "scale_px_per_m": 50,
+    "floor_height_m": 3.0,
+    "parser_version": "1.0",
+    "fallback_used": false
+  },
+  "walls": [
+    {
+      "x1": 76,
+      "y1": 71,
+      "x2": 733,
+      "y2": 71,
+      "orientation": "horizontal",
+      "length_px": 657.0,
+      "length_m": 13.14,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 74,
+      "x2": 734,
+      "y2": 74,
+      "orientation": "horizontal",
+      "length_px": 659.0,
+      "length_m": 13.18,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 73,
+      "x2": 734,
+      "y2": 73,
+      "orientation": "horizontal",
+      "length_px": 659.0,
+      "length_m": 13.18,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 72,
+      "x2": 734,
+      "y2": 72,
+      "orientation": "horizontal",
+      "length_px": 659.0,
+      "length_m": 13.18,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 77,
+      "y1": 70,
+      "x2": 732,
+      "y2": 70,
+      "orientation": "horizontal",
+      "length_px": 655.0,
+      "length_m": 13.1,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 482,
+      "x2": 359,
+      "y2": 482,
+      "orientation": "horizontal",
+      "length_px": 284.0,
+      "length_m": 5.68,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 284,
+      "x2": 418,
+      "y2": 284,
+      "orientation": "horizontal",
+      "length_px": 343.0,
+      "length_m": 6.86,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 487,
+      "y1": 280,
+      "x2": 734,
+      "y2": 280,
+      "orientation": "horizontal",
+      "length_px": 247.0,
+      "length_m": 4.94,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 283,
+      "x2": 418,
+      "y2": 283,
+      "orientation": "horizontal",
+      "length_px": 343.0,
+      "length_m": 6.86,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 279,
+      "x2": 416,
+      "y2": 279,
+      "orientation": "horizontal",
+      "length_px": 341.0,
+      "length_m": 6.82,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 282,
+      "x2": 418,
+      "y2": 282,
+      "orientation": "horizontal",
+      "length_px": 343.0,
+      "length_m": 6.86,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 75,
+      "x2": 734,
+      "y2": 75,
+      "orientation": "horizontal",
+      "length_px": 659.0,
+      "length_m": 13.18,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 281,
+      "x2": 418,
+      "y2": 281,
+      "orientation": "horizontal",
+      "length_px": 343.0,
+      "length_m": 6.86,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 471,
+      "y1": 476,
+      "x2": 734,
+      "y2": 476,
+      "orientation": "horizontal",
+      "length_px": 263.0,
+      "length_m": 5.26,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 479,
+      "x2": 359,
+      "y2": 479,
+      "orientation": "horizontal",
+      "length_px": 284.0,
+      "length_m": 5.68,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 286,
+      "x2": 417,
+      "y2": 286,
+      "orientation": "horizontal",
+      "length_px": 342.0,
+      "length_m": 6.84,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 481,
+      "x2": 359,
+      "y2": 481,
+      "orientation": "horizontal",
+      "length_px": 284.0,
+      "length_m": 5.68,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 472,
+      "y1": 475,
+      "x2": 734,
+      "y2": 475,
+      "orientation": "horizontal",
+      "length_px": 262.0,
+      "length_m": 5.24,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 470,
+      "y1": 484,
+      "x2": 732,
+      "y2": 484,
+      "orientation": "horizontal",
+      "length_px": 262.0,
+      "length_m": 5.24,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 470,
+      "y1": 477,
+      "x2": 734,
+      "y2": 477,
+      "orientation": "horizontal",
+      "length_px": 264.0,
+      "length_m": 5.28,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 487,
+      "y1": 285,
+      "x2": 734,
+      "y2": 285,
+      "orientation": "horizontal",
+      "length_px": 247.0,
+      "length_m": 4.94,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 470,
+      "y1": 480,
+      "x2": 734,
+      "y2": 480,
+      "orientation": "horizontal",
+      "length_px": 264.0,
+      "length_m": 5.28,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 478,
+      "x2": 359,
+      "y2": 478,
+      "orientation": "horizontal",
+      "length_px": 284.0,
+      "length_m": 5.68,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 238,
+      "y1": 77,
+      "x2": 476,
+      "y2": 77,
+      "orientation": "horizontal",
+      "length_px": 238.0,
+      "length_m": 4.76,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 76,
+      "y1": 483,
+      "x2": 359,
+      "y2": 483,
+      "orientation": "horizontal",
+      "length_px": 283.0,
+      "length_m": 5.66,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 238,
+      "y1": 79,
+      "x2": 476,
+      "y2": 79,
+      "orientation": "horizontal",
+      "length_px": 238.0,
+      "length_m": 4.76,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 238,
+      "y1": 78,
+      "x2": 476,
+      "y2": 78,
+      "orientation": "horizontal",
+      "length_px": 238.0,
+      "length_m": 4.76,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 731,
+      "y1": 76,
+      "x2": 731,
+      "y2": 474,
+      "orientation": "vertical",
+      "length_px": 398.0,
+      "length_m": 7.96,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 237,
+      "y1": 76,
+      "x2": 477,
+      "y2": 76,
+      "orientation": "horizontal",
+      "length_px": 240.0,
+      "length_m": 4.8,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 726,
+      "y1": 474,
+      "x2": 726,
+      "y2": 76,
+      "orientation": "vertical",
+      "length_px": 398.0,
+      "length_m": 7.96,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 725,
+      "y1": 474,
+      "x2": 725,
+      "y2": 76,
+      "orientation": "vertical",
+      "length_px": 398.0,
+      "length_m": 7.96,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 730,
+      "y1": 108,
+      "x2": 730,
+      "y2": 474,
+      "orientation": "vertical",
+      "length_px": 366.0,
+      "length_m": 7.32,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 76,
+      "y1": 77,
+      "x2": 76,
+      "y2": 280,
+      "orientation": "vertical",
+      "length_px": 203.0,
+      "length_m": 4.06,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 407,
+      "y1": 201,
+      "x2": 407,
+      "y2": 80,
+      "orientation": "vertical",
+      "length_px": 121.0,
+      "length_m": 2.42,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 406,
+      "y1": 285,
+      "x2": 406,
+      "y2": 481,
+      "orientation": "vertical",
+      "length_px": 196.0,
+      "length_m": 3.92,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 80,
+      "y1": 280,
+      "x2": 80,
+      "y2": 77,
+      "orientation": "vertical",
+      "length_px": 203.0,
+      "length_m": 4.06,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 79,
+      "y1": 480,
+      "x2": 79,
+      "y2": 285,
+      "orientation": "vertical",
+      "length_px": 195.0,
+      "length_m": 3.9,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 401,
+      "y1": 481,
+      "x2": 401,
+      "y2": 285,
+      "orientation": "vertical",
+      "length_px": 196.0,
+      "length_m": 3.92,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 403,
+      "y1": 201,
+      "x2": 403,
+      "y2": 80,
+      "orientation": "vertical",
+      "length_px": 121.0,
+      "length_m": 2.42,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 402,
+      "y1": 482,
+      "x2": 402,
+      "y2": 285,
+      "orientation": "vertical",
+      "length_px": 197.0,
+      "length_m": 3.94,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 732,
+      "y1": 240,
+      "x2": 732,
+      "y2": 76,
+      "orientation": "vertical",
+      "length_px": 164.0,
+      "length_m": 3.28,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 404,
+      "y1": 201,
+      "x2": 404,
+      "y2": 80,
+      "orientation": "vertical",
+      "length_px": 121.0,
+      "length_m": 2.42,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 75,
+      "y1": 480,
+      "x2": 75,
+      "y2": 285,
+      "orientation": "vertical",
+      "length_px": 195.0,
+      "length_m": 3.9,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 404,
+      "y1": 285,
+      "x2": 404,
+      "y2": 436,
+      "orientation": "vertical",
+      "length_px": 151.0,
+      "length_m": 3.02,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 78,
+      "y1": 480,
+      "x2": 78,
+      "y2": 285,
+      "orientation": "vertical",
+      "length_px": 195.0,
+      "length_m": 3.9,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 129,
+      "y1": 83,
+      "x2": 240,
+      "y2": 83,
+      "orientation": "horizontal",
+      "length_px": 111.0,
+      "length_m": 2.22,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 131,
+      "y1": 85,
+      "x2": 240,
+      "y2": 85,
+      "orientation": "horizontal",
+      "length_px": 109.0,
+      "length_m": 2.18,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 730,
+      "y1": 76,
+      "x2": 730,
+      "y2": 183,
+      "orientation": "vertical",
+      "length_px": 107.0,
+      "length_m": 2.14,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 727,
+      "y1": 474,
+      "x2": 727,
+      "y2": 165,
+      "orientation": "vertical",
+      "length_px": 309.0,
+      "length_m": 6.18,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 625,
+      "y1": 481,
+      "x2": 734,
+      "y2": 481,
+      "orientation": "horizontal",
+      "length_px": 109.0,
+      "length_m": 2.18,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 78,
+      "y1": 77,
+      "x2": 78,
+      "y2": 239,
+      "orientation": "vertical",
+      "length_px": 162.0,
+      "length_m": 3.24,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 205,
+      "y1": 476,
+      "x2": 359,
+      "y2": 476,
+      "orientation": "horizontal",
+      "length_px": 154.0,
+      "length_m": 3.08,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 734,
+      "y1": 417,
+      "x2": 734,
+      "y2": 76,
+      "orientation": "vertical",
+      "length_px": 341.0,
+      "length_m": 6.82,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 408,
+      "y1": 476,
+      "x2": 408,
+      "y2": 285,
+      "orientation": "vertical",
+      "length_px": 191.0,
+      "length_m": 3.82,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 76,
+      "y1": 480,
+      "x2": 76,
+      "y2": 285,
+      "orientation": "vertical",
+      "length_px": 195.0,
+      "length_m": 3.9,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 718,
+      "y1": 210,
+      "x2": 718,
+      "y2": 109,
+      "orientation": "vertical",
+      "length_px": 101.0,
+      "length_m": 2.02,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 711,
+      "y1": 210,
+      "x2": 711,
+      "y2": 109,
+      "orientation": "vertical",
+      "length_px": 101.0,
+      "length_m": 2.02,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 474,
+      "y1": 84,
+      "x2": 585,
+      "y2": 84,
+      "orientation": "horizontal",
+      "length_px": 111.0,
+      "length_m": 2.22,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 90,
+      "y1": 429,
+      "x2": 90,
+      "y2": 310,
+      "orientation": "vertical",
+      "length_px": 119.0,
+      "length_m": 2.38,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 88,
+      "y1": 430,
+      "x2": 88,
+      "y2": 310,
+      "orientation": "vertical",
+      "length_px": 120.0,
+      "length_m": 2.4,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 719,
+      "y1": 210,
+      "x2": 719,
+      "y2": 109,
+      "orientation": "vertical",
+      "length_px": 101.0,
+      "length_m": 2.02,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 476,
+      "y1": 482,
+      "x2": 646,
+      "y2": 482,
+      "orientation": "horizontal",
+      "length_px": 170.0,
+      "length_m": 3.4,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 576,
+      "y1": 474,
+      "x2": 576,
+      "y2": 364,
+      "orientation": "vertical",
+      "length_px": 110.0,
+      "length_m": 2.2,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 710,
+      "y1": 410,
+      "x2": 710,
+      "y2": 309,
+      "orientation": "vertical",
+      "length_px": 101.0,
+      "length_m": 2.02,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 89,
+      "y1": 429,
+      "x2": 89,
+      "y2": 310,
+      "orientation": "vertical",
+      "length_px": 119.0,
+      "length_m": 2.38,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 728,
+      "y1": 474,
+      "x2": 728,
+      "y2": 222,
+      "orientation": "vertical",
+      "length_px": 252.0,
+      "length_m": 5.04,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 77,
+      "y1": 480,
+      "x2": 77,
+      "y2": 285,
+      "orientation": "vertical",
+      "length_px": 195.0,
+      "length_m": 3.9,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 91,
+      "y1": 428,
+      "x2": 91,
+      "y2": 311,
+      "orientation": "vertical",
+      "length_px": 117.0,
+      "length_m": 2.34,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 583,
+      "y1": 77,
+      "x2": 723,
+      "y2": 77,
+      "orientation": "horizontal",
+      "length_px": 140.0,
+      "length_m": 2.8,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 577,
+      "y1": 370,
+      "x2": 577,
+      "y2": 474,
+      "orientation": "vertical",
+      "length_px": 104.0,
+      "length_m": 2.08,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 583,
+      "y1": 78,
+      "x2": 723,
+      "y2": 78,
+      "orientation": "horizontal",
+      "length_px": 140.0,
+      "length_m": 2.8,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 573,
+      "y1": 474,
+      "x2": 573,
+      "y2": 364,
+      "orientation": "vertical",
+      "length_px": 110.0,
+      "length_m": 2.2,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 486,
+      "y1": 282,
+      "x2": 710,
+      "y2": 282,
+      "orientation": "horizontal",
+      "length_px": 224.0,
+      "length_m": 4.48,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 574,
+      "y1": 474,
+      "x2": 574,
+      "y2": 368,
+      "orientation": "vertical",
+      "length_px": 106.0,
+      "length_m": 2.12,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 491,
+      "y1": 281,
+      "x2": 595,
+      "y2": 281,
+      "orientation": "horizontal",
+      "length_px": 104.0,
+      "length_m": 2.08,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 733,
+      "y1": 360,
+      "x2": 733,
+      "y2": 127,
+      "orientation": "vertical",
+      "length_px": 233.0,
+      "length_m": 4.66,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 476,
+      "y1": 86,
+      "x2": 583,
+      "y2": 86,
+      "orientation": "horizontal",
+      "length_px": 107.0,
+      "length_m": 2.14,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 351,
+      "y1": 551,
+      "x2": 479,
+      "y2": 542,
+      "orientation": "diagonal",
+      "length_px": 128.3,
+      "length_m": 2.57,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 352,
+      "y1": 549,
+      "x2": 479,
+      "y2": 549,
+      "orientation": "horizontal",
+      "length_px": 127.0,
+      "length_m": 2.54,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 85,
+      "y1": 280,
+      "x2": 417,
+      "y2": 280,
+      "orientation": "horizontal",
+      "length_px": 332.0,
+      "length_m": 6.64,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 540,
+      "y1": 283,
+      "x2": 653,
+      "y2": 283,
+      "orientation": "horizontal",
+      "length_px": 113.0,
+      "length_m": 2.26,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 407,
+      "y1": 419,
+      "x2": 407,
+      "y2": 285,
+      "orientation": "vertical",
+      "length_px": 134.0,
+      "length_m": 2.68,
+      "wall_type": "partition"
+    },
+    {
+      "x1": 475,
+      "y1": 85,
+      "x2": 584,
+      "y2": 85,
+      "orientation": "horizontal",
+      "length_px": 109.0,
+      "length_m": 2.18,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 93,
+      "y1": 476,
+      "x2": 263,
+      "y2": 476,
+      "orientation": "horizontal",
+      "length_px": 170.0,
+      "length_m": 3.4,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 350,
+      "y1": 544,
+      "x2": 458,
+      "y2": 544,
+      "orientation": "horizontal",
+      "length_px": 108.0,
+      "length_m": 2.16,
+      "wall_type": "load_bearing"
+    },
+    {
+      "x1": 85,
+      "y1": 285,
+      "x2": 400,
+      "y2": 285,
+      "orientation": "horizontal",
+      "length_px": 315.0,
+      "length_m": 6.3,
+      "wall_type": "load_bearing"
+    }
+  ],
+  "rooms": [
+    {
+      "label": "Room_Area_1",
+      "centroid_px": [
+        404,
+        284
+      ],
+      "bounding_box_px": [
+        71,
+        66,
+        668,
+        491
+      ],
+      "area_m2": 116.31,
+      "polygon_px": [
+        [
+          71,
+          68
+        ],
+        [
+          73,
+          488
+        ],
+        [
+          481,
+          556
+        ],
+        [
+          486,
+          488
+        ],
+        [
+          738,
+          486
+        ],
+        [
+          736,
+          66
+        ]
+      ]
+    },
+    {
+      "label": "Room_Area_2",
+      "centroid_px": [
+        313,
+        396
+      ],
+      "bounding_box_px": [
+        88,
+        290,
+        480,
+        250
+      ],
+      "area_m2": 31.66,
+      "polygon_px": [
+        [
+          88,
+          293
+        ],
+        [
+          394,
+          290
+        ],
+        [
+          399,
+          487
+        ],
+        [
+          412,
+          362
+        ],
+        [
+          494,
+          298
+        ],
+        [
+          567,
+          468
+        ],
+        [
+          458,
+          477
+        ],
+        [
+          463,
+          539
+        ],
+        [
+          366,
+          539
+        ],
+        [
+          361,
+          471
+        ],
+        [
+          91,
+          471
+        ]
+      ]
+    },
+    {
+      "label": "Room_Area_3",
+      "centroid_px": [
+        403,
+        185
+      ],
+      "bounding_box_px": [
+        88,
+        83,
+        634,
+        270
+      ],
+      "area_m2": 47.28,
+      "polygon_px": [
+        [
+          88,
+          86
+        ],
+        [
+          394,
+          83
+        ],
+        [
+          410,
+          205
+        ],
+        [
+          415,
+          83
+        ],
+        [
+          718,
+          83
+        ],
+        [
+          721,
+          272
+        ],
+        [
+          484,
+          275
+        ],
+        [
+          413,
+          351
+        ],
+        [
+          474,
+          193
+        ],
+        [
+          394,
+          275
+        ],
+        [
+          91,
+          275
+        ]
+      ]
+    }
+  ],
+  "openings": [],
+  "summary": {
+    "total_walls": 86,
+    "load_bearing_walls": 77,
+    "partition_walls": 9,
+    "total_rooms": 3,
+    "total_openings": 0,
+    "doors": 0,
+    "windows": 0
+  }
+}
