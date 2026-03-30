@@ -1,0 +1,167 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* WallWise Custom Theme - Dark Mode First */
+:root {
+  --background: #0a0a0f;
+  --foreground: #e8e6de;
+  --card: #12121a;
+  --card-foreground: #e8e6de;
+  --popover: #12121a;
+  --popover-foreground: #e8e6de;
+  --primary: #0F6E56;
+  --primary-foreground: #e8e6de;
+  --secondary: #534AB7;
+  --secondary-foreground: #e8e6de;
+  --muted: #1a1a24;
+  --muted-foreground: #888780;
+  --accent: #BA7517;
+  --accent-foreground: #e8e6de;
+  --destructive: #dc2626;
+  --destructive-foreground: #e8e6de;
+  --border: #2a2a35;
+  --input: #1a1a24;
+  --ring: #0F6E56;
+  --chart-1: #0F6E56;
+  --chart-2: #534AB7;
+  --chart-3: #BA7517;
+  --chart-4: #E07B54;
+  --chart-5: #3B82F6;
+  --radius: 0.625rem;
+  
+  /* Custom WallWise colors */
+  --ww-teal: #0F6E56;
+  --ww-purple: #534AB7;
+  --ww-amber: #BA7517;
+  --ww-coral: #E07B54;
+  --ww-blue: #3B82F6;
+  --ww-surface: #12121a;
+  --ww-surface-light: #1a1a24;
+}
+
+@theme inline {
+  --font-sans: 'Inter', 'Geist', sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  /* WallWise custom colors */
+  --color-ww-teal: var(--ww-teal);
+  --color-ww-purple: var(--ww-purple);
+  --color-ww-amber: var(--ww-amber);
+  --color-ww-coral: var(--ww-coral);
+  --color-ww-blue: var(--ww-blue);
+  --color-ww-surface: var(--ww-surface);
+  --color-ww-surface-light: var(--ww-surface-light);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--ww-teal), 0 0 10px var(--ww-teal);
+  }
+  50% {
+    box-shadow: 0 0 10px var(--ww-teal), 0 0 20px var(--ww-teal);
+  }
+}
+
+@keyframes grid-flow {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.blueprint-grid {
+  background-image: 
+    linear-gradient(rgba(15, 110, 86, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 110, 86, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-flow 20s linear infinite;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
